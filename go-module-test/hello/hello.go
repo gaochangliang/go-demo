@@ -1,4 +1,4 @@
-package hello_world
+package hello
 
 import (
 	quoteV3 "rsc.io/quote/v3"
@@ -7,7 +7,6 @@ import (
 func Hello() string {
 	return quoteV3.HelloV3()
 }
-
 
 func Proverb() string {
 	return quoteV3.Concurrency()
