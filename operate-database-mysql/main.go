@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"html/template"
 	"log"
@@ -79,7 +80,7 @@ func New(w http.ResponseWriter, r *http.Request) {
 	tmpl.ExecuteTemplate(w, "New", nil)
 }
 
-func Edit(w http.ResponseWriter, r *http.Request) {
+func Edit2(w http.ResponseWriter, r *http.Request) {
 	db := dbConn()
 	nid := r.URL.Query().Get("id")
 	selDB, err := db.Query("select * from Employee where id=?", nid)
@@ -103,6 +104,31 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 }
 
+
+func Edit(w http.ResponseWriter, r *http.Request) {
+	db := dbConn()
+	nId := r.URL.Query().Get("id")
+	selDB, err := db.Query("SELECT * FROM Employee WHERE id=?", nId)
+	if err != nil {
+		panic(err.Error())
+	}
+	emp := Employee{}
+	for selDB.Next() {
+		var id int
+		var name, city string
+		err = selDB.Scan(&id, &name, &city)
+		if err != nil {
+			panic(err.Error())
+		}
+		emp.Id = id
+		emp.Name = name
+		emp.City = city
+	}
+	tmpl.ExecuteTemplate(w, "Edit", emp)
+	defer db.Close()
+}
+
+
 func Insert(w http.ResponseWriter, r *http.Request) {
 	db := dbConn()
 	if r.Method == "POST" {
@@ -124,14 +150,39 @@ func Update(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		name := r.FormValue("name")
 		city := r.FormValue("city")
-		id := r.FormValue("id")
+		uid := r.FormValue("uid")
 		insForm, err := db.Prepare("update Employee set name=?,city=? where id=?")
 		if err != nil {
 			panic(err.Error())
 		}
-		insForm.Exec(name, city, id)
-		log.Println("Insert: Name: " + name + " | City: " + city + "id: " + id)
+		insForm.Exec(name, city, uid)
+		log.Println("update: Name: " + name + " | City: " + city + "id: " + uid)
 	}
 	defer db.Close()
 	http.Redirect(w, r, "/", 301)
+}
+
+func Delete(w http.ResponseWriter, r *http.Request) {
+	db := dbConn()
+	nid := r.URL.Query().Get("id")
+	delForm, err := db.Prepare("delete from Employee where  id=?")
+	if err != nil {
+		panic(err.Error())
+	}
+	delForm.Exec(nid)
+	log.Println("delete: ", nid)
+	defer db.Close()
+	http.Redirect(w, r, "/", 301)
+}
+
+func main() {
+	fmt.Println("server start at localhost:8080")
+	http.HandleFunc("/", Index)
+	http.HandleFunc("/show", Show)
+	http.HandleFunc("/new", New)
+	http.HandleFunc("/edit", Edit)
+	http.HandleFunc("/update", Update)
+	http.HandleFunc("/delete", Delete)
+	http.HandleFunc("/insert", Insert)
+	http.ListenAndServe(":8080", nil)
 }
