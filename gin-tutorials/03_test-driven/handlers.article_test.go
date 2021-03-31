@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -28,4 +29,12 @@ func TestShowIndexPageUnauthenticated(t *testing.T) {
 
 		return statusOK && pageOK
 	})
+}
+
+func showArticleCreatePage(c *gin.Context) {
+
+}
+
+func createArticle(c *gin.Context) {
+
 }
