@@ -20,9 +20,9 @@ func showRegistrationPage(c *gin.Context) {
 func register(c *gin.Context) {
 	username := c.PostForm("username")
 	password := c.PostForm("password")
-	if _, err := registerNewUser(username, password); err != nil {
+	if _, err := registerNewUser(username, password); err == nil {
 		token := generateSessionToken()
-		c.SetCookie("token", token, 3600, "", "", false, false)
+		c.SetCookie("token", token, 10, "", "", false, false)
 		c.Set("is_logged_in", true)
 		render(c, gin.H{
 			"title": "Successful registration  & Login",
@@ -59,7 +59,7 @@ func performLogin(c *gin.Context) {
 	password := c.PostForm("password")
 	if isUserValid(username, password) {
 		token := generateSessionToken()
-		c.SetCookie("token", token, 3600, "", "", false, true)
+		c.SetCookie("token", token, 1, "", "", false, true)
 		render(c, gin.H{
 			"title": "Successful Login"}, "login-successful.html")
 	} else {

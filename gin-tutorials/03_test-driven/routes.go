@@ -1,38 +1,21 @@
 package main
 
-import (
-	"github.com/gin-gonic/gin"
-	"net/http"
-)
-
 func initializeRoutes() {
+	router.Use(setUserStatus())
 	router.GET("/", showIndexPage)
-	router.GET("/article/view/:article_id", getArticle)
 	userRoutes := router.Group("/u")
 	{
-		userRoutes.GET("/register", showRegistrationPage)
-		userRoutes.POST("/register", register)
-		userRoutes.GET("/login", showLoginPage)
-		userRoutes.POST("/login", performLogin)
-		userRoutes.GET("/logout", logout)
-
+		userRoutes.GET("/register", ensureNotLoggedIn(), showRegistrationPage)
+		userRoutes.POST("/register", ensureNotLoggedIn(), register)
+		userRoutes.GET("/login", ensureNotLoggedIn(), showLoginPage)
+		userRoutes.POST("/login", ensureNotLoggedIn(), performLogin)
+		userRoutes.GET("/logout", ensureLoggedIn(), logout)
 	}
 
 	articleRoutes := router.Group("/article")
 	{
 		articleRoutes.GET("/view/:article_id", getArticle)
-		articleRoutes.GET("/create", showArticleCreationPage)
-		articleRoutes.POST("/create", createArticle)
-	}
-}
-
-func render(c *gin.Context, data gin.H, templateName string) {
-	switch c.Request.Header.Get("Accept") {
-	case "application/json":
-		c.JSON(http.StatusOK, data["payload"])
-	case "application/xml":
-		c.XML(http.StatusOK, data["payload"])
-	default:
-		c.HTML(http.StatusOK, templateName, data)
+		articleRoutes.GET("/create", ensureLoggedIn(), showArticleCreationPage)
+		articleRoutes.POST("/create", ensureLoggedIn(), createArticle)
 	}
 }
