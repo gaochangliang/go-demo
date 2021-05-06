@@ -2,12 +2,15 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 )
 
 func main() {
 	http.HandleFunc("/", indexHandler)
-	http.HandleFunc("/", helloHandler)
+	http.HandleFunc("/hello", helloHandler)
+
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 /*

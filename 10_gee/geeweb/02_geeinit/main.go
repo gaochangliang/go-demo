@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 )
 
 func main() {
-
+	engine := new(Engine)
+	log.Fatal(http.ListenAndServe(":9999", engine))
 }
 
 type Engine struct {
