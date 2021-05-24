@@ -1,4 +1,8 @@
-//Get the current version of go
+/*
+Get the current version of go
+go的版本可能有如下几中形式 1.9.7  1.10
+*/
+
 package main
 
 import (
