@@ -14,3 +14,5 @@ func main() {
 		fmt.Println("good man jordan")
 	}
 }
+
+//  Matching to one will end immediately
