@@ -17,3 +17,5 @@ func average(sf ...float64) float64 {
 
 	return total / float64(len(sf))
 }
+
+//variadic 可变参数
