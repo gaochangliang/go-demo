@@ -11,7 +11,7 @@ func main() {
 
 }
 
-func incrementor() chan int {
+func incrementor() <-chan int {
 	c := make(chan int)
 	go func() {
 		for i := 0; i < 10; i++ {
@@ -23,7 +23,7 @@ func incrementor() chan int {
 	return c
 }
 
-func puller(c chan int) chan int {
+func puller(c <-chan int) <-chan int {
 	out := make(chan int)
 	go func() {
 		var sum int

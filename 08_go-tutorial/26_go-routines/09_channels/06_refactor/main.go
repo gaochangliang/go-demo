@@ -4,14 +4,13 @@ import "fmt"
 
 func main() {
 	c := incrementor()
-	cSum := puller(c)
-	for k := range cSum {
+	for k := range puller(c) {
 		fmt.Println(k)
 	}
 
 }
 
-func incrementor() chan int {
+func incrementor() <-chan int {
 	c := make(chan int)
 	go func() {
 		for i := 0; i < 10; i++ {
@@ -23,7 +22,7 @@ func incrementor() chan int {
 	return c
 }
 
-func puller(c chan int) chan int {
+func puller(c <-chan int) <-chan int {
 	out := make(chan int)
 	go func() {
 		var sum int
