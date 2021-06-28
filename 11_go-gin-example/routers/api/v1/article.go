@@ -87,7 +87,7 @@ func GetArticle(c *gin.Context) {
 	})
 }
 
-func addArticle(c *gin.Context) {
+func AddArticle(c *gin.Context) {
 	tagId := com.StrTo(c.Query("tag_id")).MustInt()
 	title := c.Query("title")
 	desc := c.Query("desc")
@@ -113,7 +113,7 @@ func addArticle(c *gin.Context) {
 			data["title"] = title
 			data["desc"] = desc
 			data["content"] = content
-			data["create_by"] = createBy
+			data["created_by"] = createBy
 			data["state"] = state
 			models.AddArticle(data)
 			code = e.SUCCESS
@@ -134,19 +134,88 @@ func addArticle(c *gin.Context) {
 
 }
 
-
+//传递过来的默认是字符串，字符串类型变量不需要处理
+//number类型必须要转化
 
 func EditArticle(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
+	tagId := com.StrTo(c.Query("tag_id")).MustInt()
 	title := c.Query("title")
 	desc := c.Query("desc")
 	content := c.Query("content")
-	createBy := c.Query("create_by")
+	modifiedBy := c.Query("modified_by")
 	state := com.StrTo(c.Query("state")).MustInt()
 
 	valid := validation.Validation{}
+	valid.Min(id, 1, "id").Message("id最小值为1")
+	valid.Range(state, 0, 1, "state").Message("state必须为0或者1")
+	valid.MaxSize(title, 100, "title").Message("message最大为100")
+	valid.MaxSize(desc, 255, "desc").Message("desc最大为100")
+	valid.MaxSize(content, 65535, "content").Message("desc最大为65535")
+	valid.Required(modifiedBy, "modified_by").Message("修改人不能为空")
+	valid.MaxSize(modifiedBy, 100, "modified_by").Message("修改人最长为100字符")
 
-	valid.
+	code := e.INVALID_PARAMS
+	if !valid.HasErrors() {
+		if models.ExistArticleById(id) {
+			//需要验证标签
+			if models.ExistTagById(tagId) {
+				data := make(map[string]interface{})
+				if tagId > 0 {
+					data["tag_id"] = tagId
+				}
+				if content != "" {
+					data["content"] = content
+				}
+				if desc != "" {
+					data["desc"] = desc
+				}
+				if title != "" {
+					data["title"] = title
+				}
+				data["modifiedBy"] = modifiedBy
+				code = e.SUCCESS
+				models.EditArticle(id, data)
+			} else {
+				code = e.ERROR_NOT_EXIST_TAG
+			}
+		} else {
+			code = e.ERROR_NOT_EXIST_ARTICLE
+		}
+	} else {
+		for _, err := range valid.Errors {
+			log.Printf("err.key: %s,err.message:%s", err.Key, err.Message)
+		}
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"code":    code,
+		"data":    make(map[string]string),
+		"message": e.GetMsg(code),
+	})
 
+}
 
+func DeleteArticle(c *gin.Context) {
+	id := com.StrTo(c.Param("id")).MustInt()
+	valid := validation.Validation{}
+
+	valid.Min(id, 1, "id").Message("最小值为1")
+	code := e.INVALID_PARAMS
+	if !valid.HasErrors() {
+		if !models.ExistArticleById(id) {
+			code = e.ERROR_NOT_EXIST_ARTICLE
+		} else {
+			code = e.SUCCESS
+			models.DeleteArticle(id)
+		}
+	} else {
+		for _, err := range valid.Errors {
+			log.Printf("err.key: %s,err.message:%s", err.Key, err.Message)
+		}
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"code":    code,
+		"data":    make(map[string]string),
+		"message": e.GetMsg(code),
+	})
 }
