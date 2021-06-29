@@ -1,8 +1,10 @@
 package v1
 
 import (
+	"fmt"
 	"gin-blog/models"
 	"gin-blog/pkg/e"
+	"gin-blog/pkg/logging"
 	"gin-blog/pkg/setting"
 	"gin-blog/pkg/util"
 	"github.com/astaxie/beego/validation"
@@ -43,7 +45,7 @@ func GetArticles(c *gin.Context) {
 		data["total"] = models.GetArticleTotal(maps)
 	} else {
 		for _, err := range valid.Errors {
-			log.Printf("key %v err %v", err.Key, err.Message)
+			logging.Info("key", err.Key, "message", err.Message)
 		}
 	}
 
@@ -77,7 +79,8 @@ func GetArticle(c *gin.Context) {
 
 	} else {
 		for _, err := range valid.Errors {
-			log.Printf("key %v err %v", err.Key, err.Message)
+			fmt.Println("122321131223")
+			logging.Info("key", err.Key, "message", err.Message)
 		}
 	}
 	c.JSON(http.StatusOK, gin.H{

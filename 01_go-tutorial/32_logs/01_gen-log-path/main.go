@@ -19,11 +19,11 @@ func getLogFilePath() string {
 
 func getLogFileFullPath() {
 	prefixPath := getLogFilePath()
-	suffixPath := fmt.Sprintf("%s%s.%s", LogSavePath, time.Now().Format(TimeFormat), LogFileExt)
+	suffixPath := fmt.Sprintf("%s%s.%s", LogSaveName, time.Now().Format(TimeFormat), LogFileExt)
 
 	fmt.Println(prefixPath + suffixPath)
 }
 
 func main() {
-
+	getLogFileFullPath()
 }

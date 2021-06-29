@@ -12,7 +12,14 @@ import (
 	"net/http"
 )
 
-//获取文章标签
+// @Summary 测试获取标签
+// @Tags 测试
+// @Description 获取文章标签
+// @Accept json
+// @Param   name  query string true     "人名"
+// @Success 200 {string} string "{"msg": "hello Razeen"}"
+// @Failure 400 {string} string "{"msg": "who are you"}"
+// @Router /api/v1/GetTags [get]
 func GetTags(c *gin.Context) {
 	name := c.Query("name")
 
