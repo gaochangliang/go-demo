@@ -16,8 +16,8 @@ import (
 // @Tags 测试
 // @Description 获取文章标签
 // @Accept json
-// @Param   name  query string true     "人名"
-// @Success 200 {string} string "{"msg": "hello Razeen"}"
+// @Param   name  query string true   "Name"
+// @Success 200 {object}
 // @Failure 400 {string} string "{"msg": "who are you"}"
 // @Router /api/v1/GetTags [get]
 func GetTags(c *gin.Context) {

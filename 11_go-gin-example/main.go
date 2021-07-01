@@ -19,7 +19,6 @@ import (
 // @host 127.0.0.1:80
 // @BasePath /api/v1
 func main() {
-
 	router := routers.InitRouter()
 	s := &http.Server{
 		Addr:           fmt.Sprintf(":%d", setting.HTTPPort),
