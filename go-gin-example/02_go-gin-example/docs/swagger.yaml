@@ -1,0 +1,39 @@
+basePath: /api/v1
+host: 127.0.0.1:80
+info:
+  contact:
+    email: me@razeen.me
+    name: www.topgoer.com
+    url: https://www.topgoer.com
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.topgoer.com
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /api/v1/GetTags:
+    get:
+      consumes:
+      - application/json
+      description: 获取文章标签
+      parameters:
+      - description: 人名
+        in: query
+        name: name
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{"msg": "hello Razeen"}'
+          schema:
+            type: string
+        "400":
+          description: '{"msg": "who are you"}'
+          schema:
+            type: string
+      summary: 测试获取标签
+      tags:
+      - 测试
+swagger: "2.0"
