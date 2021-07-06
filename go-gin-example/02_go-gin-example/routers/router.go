@@ -1,11 +1,11 @@
 package routers
 
 import (
-	_ "gin-blog/docs"
-	"gin-blog/middleware/jwt"
-	"gin-blog/pkg/setting"
-	"gin-blog/routers/api"
-	"gin-blog/routers/api/v1"
+	_ "02_go-gin-example/gin-blog/docs"
+	"02_go-gin-example/gin-blog/middleware/jwt"
+	"02_go-gin-example/gin-blog/pkg/setting"
+	"02_go-gin-example/gin-blog/routers/api"
+	"02_go-gin-example/gin-blog/routers/api/v1"
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
@@ -16,7 +16,7 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	gin.SetMode(setting.RunMode)
+	gin.SetMode(setting.ServerSetting.RunMode)
 
 	r.GET("/test", func(c *gin.Context) {
 		c.JSON(200, gin.H{

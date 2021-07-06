@@ -1,8 +1,8 @@
 package jwt
 
 import (
-	"gin-blog/pkg/e"
-	"gin-blog/pkg/util"
+	"02_go-gin-example/gin-blog/pkg/e"
+	"02_go-gin-example/gin-blog/pkg/util"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"time"

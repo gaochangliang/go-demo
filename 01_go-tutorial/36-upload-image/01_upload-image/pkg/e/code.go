@@ -10,3 +10,9 @@ const (
 	ErrorAuthCheckTokenFail    = 20001
 	ErrorAuthCheckTokenTimeout = 20002
 )
+
+const (
+	Error_UPLOAD_SAVE_IMAGE_FAIL    = 30001
+	Error_UPLOAD_CHECK_IMAGE_FAIL   = 30002
+	Error_UPLOAD_CHECK_IMAGE_FORMAT = 30003
+)

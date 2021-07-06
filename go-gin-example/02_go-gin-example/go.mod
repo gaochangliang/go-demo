@@ -1,4 +1,4 @@
-module gin-blog
+module 02_go-gin-example/gin-blog
 
 go 1.16
 

@@ -58,6 +58,45 @@ func GetArticles(c *gin.Context) {
 
 //获取单个文章
 
+/*
+
+返回的数据格式如下
+
+{
+"code": 200,
+"data": {
+			"list": [
+			   {
+					"id": 1,
+					"created_on": 0,
+					"modified_on": 1624850484,
+					"deleted_on": 0,
+					"tag_id": 3,
+					"tag": {
+						"id": 3,
+						"created_on": 1624593499,
+						"modified_on": 1624593517,
+						"deleted_on": 0,
+						"name": "edit1",
+						"created_by": "zhaowei",
+						"modified_by": "edit1",
+						"state": 0
+					},
+					"title": "test-edit1",
+					"content": "test-content-edit",
+					"desc": "test-desc-edit",
+					"created_by": "",
+					"modified_by": "test-created-edit",
+					"state": 1
+				}
+			],
+			"total": 1
+		},
+"message": "ok"
+}
+
+*/
+
 func GetArticle(c *gin.Context) {
 	var data interface{}
 	//注意这里转换的方式

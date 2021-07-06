@@ -1,10 +1,10 @@
 package api
 
 import (
-	"gin-blog/models"
-	"gin-blog/pkg/e"
-	"gin-blog/pkg/logging"
-	"gin-blog/pkg/util"
+	"02_go-gin-example/gin-blog/models"
+	"02_go-gin-example/gin-blog/pkg/e"
+	"02_go-gin-example/gin-blog/pkg/logging"
+	"02_go-gin-example/gin-blog/pkg/util"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"net/http"

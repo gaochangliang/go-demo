@@ -28,16 +28,28 @@ func GetArticleTotal(maps interface{}) (count int) {
 }
 
 //根据条件获取文章列表
-func GetArticles(pageNum int, pageSize int, maps interface{}) (articles []Article) {
-	db.Preload("Tag").Where(maps).Offset(pageNum).Limit(pageSize).Find(&articles)
-	return
+func GetArticles(pageNum int, pageSize int, maps interface{}) ([]*Article, error) {
+	var articles []*Article
+	err := db.Preload("Tag").Where(maps).Offset(pageNum).Limit(pageSize).Find(&articles).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return articles, nil
 }
 
 //根据某个id获取文章
-func GetArticle(id int) (article Article) {
-	db.Where("id=?", id).First(&article)
-	db.Model(&article).Related(&article.Tag)
-	return
+func GetArticle(id int) (*Article, error) {
+	var article Article
+	err := db.Where("id = ? AND deleted_on = ?", id, 0).First(&article).Error
+
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	err = db.Model(&article).Related(&article.Tag).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return &article, nil
 }
 
 //新增文章
@@ -69,13 +81,18 @@ func DeleteArticle(id int) bool {
 
 //判断文章id是否存在
 //判断name是否存在
-func ExistArticleById(id int) bool {
+func ExistArticleById(id int) (bool, error) {
 	var article Article
-	db.Select("id").Where("id =?", id).First(&article)
-	if article.ID > 0 {
-		return true
+	err := db.Select("id").Where("id =?", id).First(&article).Error
+
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return false, err
 	}
-	return false
+
+	if article.ID > 0 {
+		return true, nil
+	}
+	return false, nil
 }
 
 /*

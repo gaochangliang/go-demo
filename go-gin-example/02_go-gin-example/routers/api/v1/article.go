@@ -1,12 +1,13 @@
 package v1
 
 import (
-	"fmt"
-	"gin-blog/models"
-	"gin-blog/pkg/e"
-	"gin-blog/pkg/logging"
-	"gin-blog/pkg/setting"
-	"gin-blog/pkg/util"
+	"02_go-gin-example/gin-blog/models"
+	"02_go-gin-example/gin-blog/pkg/app"
+	"02_go-gin-example/gin-blog/pkg/e"
+	"02_go-gin-example/gin-blog/pkg/logging"
+	"02_go-gin-example/gin-blog/pkg/setting"
+	"02_go-gin-example/gin-blog/pkg/util"
+	"02_go-gin-example/gin-blog/service/article_service"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
@@ -41,7 +42,7 @@ func GetArticles(c *gin.Context) {
 	code := e.INVALID_PARAMS
 	if !valid.HasErrors() {
 		code = e.SUCCESS
-		data["list"] = models.GetArticles(util.GetPage(c), setting.PageSize, maps)
+		data["list"] = models.GetArticles(util.GetPage(c), setting.AppSetting.PageSize, maps)
 		data["total"] = models.GetArticleTotal(maps)
 	} else {
 		for _, err := range valid.Errors {
@@ -59,6 +60,7 @@ func GetArticles(c *gin.Context) {
 //获取单个文章
 
 func GetArticle(c *gin.Context) {
+	appG := app.Gin{C: c}
 	var data interface{}
 	//注意这里转换的方式
 	id := com.StrTo(c.Param("id")).MustInt()
@@ -68,21 +70,24 @@ func GetArticle(c *gin.Context) {
 	valid.Min(id, 0, "id").Message("id muse large than 0")
 
 	code := e.INVALID_PARAMS
-	if !valid.HasErrors() {
-		//需要判断id是否存在
-		if !models.ExistArticleById(id) {
-			code = e.ERROR_NOT_EXIST_ARTICLE
-		} else {
-			code = e.SUCCESS
-			data = models.GetArticle(id)
-		}
 
-	} else {
-		for _, err := range valid.Errors {
-			fmt.Println("122321131223")
-			logging.Info("key", err.Key, "message", err.Message)
-		}
+	if !valid.HasErrors() {
+		app.MarkErrors(valid.Errors)
+		appG.Response(http.StatusOK, e.INVALID_PARAMS, nil)
 	}
+
+	articleService := article_service.Article{ID: id}
+	exists, err := articleService.ExistByID()
+
+	if err != nil {
+		appG.Response(http.StatusOK, e.ERROR_CHECK_EXIST_ARTICLE_FAIL, nil)
+	}
+
+	if !exists {
+		appG.Response(http.StatusOK, e.ERROR_NOT_EXIST_ARTICLE, nil)
+	}
+
+	article, err := articleService.Get(id)
 	c.JSON(http.StatusOK, gin.H{
 		"code":    code,
 		"data":    data,

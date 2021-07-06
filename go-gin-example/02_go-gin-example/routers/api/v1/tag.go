@@ -1,11 +1,10 @@
 package v1
 
 import (
+	"02_go-gin-example/gin-blog/models"
+	"02_go-gin-example/gin-blog/pkg/app"
+	"02_go-gin-example/gin-blog/pkg/e"
 	"fmt"
-	"gin-blog/models"
-	"gin-blog/pkg/e"
-	"gin-blog/pkg/setting"
-	"gin-blog/pkg/util"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
@@ -21,31 +20,41 @@ import (
 // @Failure 400 {string} string "{"msg": "who are you"}"
 // @Router /api/v1/GetTags [get]
 func GetTags(c *gin.Context) {
+	//name := c.Query("name")
+	//
+	//maps := make(map[string]interface{})
+	//data := make(map[string]interface{})
+	//
+	//if name != "" {
+	//	maps["name"] = name
+	//}
+	//
+	//var state int = -1
+	//if arg := c.Query("state"); arg != "" {
+	//	state = com.StrTo(arg).MustInt()
+	//	maps["state"] = state
+	//}
+	//
+	//code := e.SUCCESS
+	//
+	//data["lists"] = models.GetTags(util.GetPage(c), setting.AppSetting.PageSize, maps)
+	//data["total"] = models.GetTagTotal(maps)
+	//
+	//c.JSON(http.StatusOK, gin.H{
+	//	"code": code,
+	//	"msg":  e.GetMsg(code),
+	//	"data": data,
+	//})
+
+	appG := app.Gin{C: c}
 	name := c.Query("name")
-
-	maps := make(map[string]interface{})
-	data := make(map[string]interface{})
-
-	if name != "" {
-		maps["name"] = name
-	}
-
-	var state int = -1
+	state := -1
 	if arg := c.Query("state"); arg != "" {
 		state = com.StrTo(arg).MustInt()
-		maps["state"] = state
 	}
 
-	code := e.SUCCESS
+	tagService := tag_service.Tag{}
 
-	data["lists"] = models.GetTags(util.GetPage(c), setting.PageSize, maps)
-	data["total"] = models.GetTagTotal(maps)
-
-	c.JSON(http.StatusOK, gin.H{
-		"code": code,
-		"msg":  e.GetMsg(code),
-		"data": data,
-	})
 }
 
 //新增文件标签

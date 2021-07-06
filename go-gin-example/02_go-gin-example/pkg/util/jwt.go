@@ -1,12 +1,13 @@
 package util
 
 import (
-	"gin-blog/pkg/setting"
+	"02_go-gin-example/gin-blog/pkg/setting"
+
 	"github.com/dgrijalva/jwt-go"
 	"time"
 )
 
-var jwtSecret = []byte(setting.JwtSecret)
+var jwtSecret = []byte(setting.AppSetting.JwtSecret)
 
 type Claims struct {
 	Username string

@@ -32,6 +32,6 @@ func SetUp() {
 	if err != nil {
 		log.Printf("cfg section error %v", err)
 	}
-
+	AppSetting.ImageMaxSize = AppSetting.ImageMaxSize * 1024 * 1024
 	fmt.Println(AppSetting)
 }
