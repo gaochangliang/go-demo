@@ -6,12 +6,17 @@ var MsgFlags = map[int]string{
 
 	INVALID_PARAMS: "请求参数错误",
 
-	ERROR_EXIST_TAG:     "已存在该标签名称",
-	ERROR_NOT_EXIST_TAG: "该标签不存在",
+	ERROR_EXIST_TAG:      "已存在该标签名称",
+	ERROR_EXIST_TAG_FAIL: "获取已存在标签失败",
+	ERROR_NOT_EXIST_TAG:  "该标签不存在",
 
-	ERROR_NOT_EXIST_ARTICLE: "该文章不存在",
+	ERROR_ADD_TAG_FAIL:    "添加标签失败",
+	ERROR_GET_TAGS_FAIL:   "获取所有标签失败",
+	ERROR_COUNT_TAG_ERROR: "统计标签失败",
+	ERROR_EDIT_TAG_FAIL:   "编辑标签失败",
 
 	ERROR_CHECK_EXIST_ARTICLE_FAIL: "检查文章是否存在失败",
+	ERROR_NOT_EXIST_ARTICLE:        "该文章不存在",
 
 	ERROR_AUTH_CHECK_TOKEN_FAIL:    "Token鉴权失败",
 	ERROR_AUTH_CHECK_TOKEN_TIMEOUT: "Token已超时",

@@ -1,7 +1,6 @@
 package v1
 
 import (
-	"fmt"
 	"gin-blog/models"
 	"gin-blog/pkg/e"
 	"gin-blog/pkg/setting"
@@ -50,40 +49,41 @@ func GetTags(c *gin.Context) {
 
 //新增文件标签
 func AddTag(c *gin.Context) {
-	name := c.Query("name")
+	//name := c.Query("name")
+	//
+	//state := com.StrTo(c.DefaultQuery("state", "0")).MustInt()
+	//
+	//fmt.Println("state", state)
+	//createdBy := c.Query("create_by")
+	//fmt.Println("create_By", createdBy)
+	//
+	//valid := validation.Validation{}
+	//valid.Required(name, "name").Message("名称不能为空")
+	//valid.MaxSize(name, 100, "name").Message("名称最大为100字符")
+	//valid.Required(createdBy, "created_by").Message("创建人不能为空")
+	//valid.MaxSize(createdBy, 100, "created_by").Message("创建人最长为100字符")
+	//valid.Range(state, 0, 1, "state").Message("状态只允许为0或1")
+	//
+	////Invalid parameters are always returned if there is an error
+	//
+	//code := e.INVALID_PARAMS
+	//fmt.Println("*********")
+	//if !valid.HasErrors() {
+	//	fmt.Println("1")
+	//	if !models.ExistTagByName(name) {
+	//		code = e.SUCCESS
+	//		models.AddTag(name, state, createdBy)
+	//	} else {
+	//		code = e.ERROR_EXIST_TAG
+	//	}
+	//}
+	//
+	//c.JSON(http.StatusOK, gin.H{
+	//	"code": code,
+	//	"msg":  e.GetMsg(code),
+	//	"data": make(map[string]string),
+	//})
 
-	state := com.StrTo(c.DefaultQuery("state", "0")).MustInt()
-
-	fmt.Println("state", state)
-	createdBy := c.Query("create_by")
-	fmt.Println("create_By", createdBy)
-
-	valid := validation.Validation{}
-	valid.Required(name, "name").Message("名称不能为空")
-	valid.MaxSize(name, 100, "name").Message("名称最大为100字符")
-	valid.Required(createdBy, "created_by").Message("创建人不能为空")
-	valid.MaxSize(createdBy, 100, "created_by").Message("创建人最长为100字符")
-	valid.Range(state, 0, 1, "state").Message("状态只允许为0或1")
-
-	//Invalid parameters are always returned if there is an error
-
-	code := e.INVALID_PARAMS
-	fmt.Println("*********")
-	if !valid.HasErrors() {
-		fmt.Println("1")
-		if !models.ExistTagByName(name) {
-			code = e.SUCCESS
-			models.AddTag(name, state, createdBy)
-		} else {
-			code = e.ERROR_EXIST_TAG
-		}
-	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"code": code,
-		"msg":  e.GetMsg(code),
-		"data": make(map[string]string),
-	})
 }
 
 //修改文章标签

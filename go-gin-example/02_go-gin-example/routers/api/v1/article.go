@@ -4,7 +4,6 @@ import (
 	"02_go-gin-example/gin-blog/models"
 	"02_go-gin-example/gin-blog/pkg/app"
 	"02_go-gin-example/gin-blog/pkg/e"
-	"02_go-gin-example/gin-blog/pkg/logging"
 	"02_go-gin-example/gin-blog/pkg/setting"
 	"02_go-gin-example/gin-blog/pkg/util"
 	"02_go-gin-example/gin-blog/service/article_service"
@@ -15,46 +14,87 @@ import (
 	"net/http"
 )
 
+type Article struct {
+	TagID int `form:"tag_id" valid:"Min(1)"`
+	State int `form:"State" valid:"Range(0,1)"`
+}
+
 //根据标签和状态获取
 func GetArticles(c *gin.Context) {
 
-	//返回的数据
-	data := make(map[string]interface{})
-	//查询条件
-	maps := make(map[string]interface{})
+	/*
 
-	valid := validation.Validation{}
+		//返回的数据
+		data := make(map[string]interface{})
+		//查询条件
+		maps := make(map[string]interface{})
 
-	var tagId int = -1
-	if arg := c.Query("tag_id"); arg != "" {
-		tagId = com.StrTo(arg).MustInt()
-		valid.Min(tagId, 1, "tag_id").Message("tag_id must larger than 1")
-		maps["tag_Id"] = tagId
-	}
+		valid := validation.Validation{}
 
-	var state = -1
-	if arg := c.Query("state"); arg != "" {
-		state = com.StrTo(arg).MustInt()
-		valid.Range(state, 0, 1, "state").Message("state must be 0 or 1")
-		maps["state"] = state
-	}
-
-	code := e.INVALID_PARAMS
-	if !valid.HasErrors() {
-		code = e.SUCCESS
-		data["list"] = models.GetArticles(util.GetPage(c), setting.AppSetting.PageSize, maps)
-		data["total"] = models.GetArticleTotal(maps)
-	} else {
-		for _, err := range valid.Errors {
-			logging.Info("key", err.Key, "message", err.Message)
+		var tagId int = -1
+		if arg := c.Query("tag_id"); arg != "" {
+			tagId = com.StrTo(arg).MustInt()
+			valid.Min(tagId, 1, "tag_id").Message("tag_id must larger than 1")
+			maps["tag_Id"] = tagId
 		}
+
+		var state = -1
+		if arg := c.Query("state"); arg != "" {
+			state = com.StrTo(arg).MustInt()
+			valid.Range(state, 0, 1, "state").Message("state must be 0 or 1")
+			maps["state"] = state
+		}
+
+		code := e.INVALID_PARAMS
+		if !valid.HasErrors() {
+			code = e.SUCCESS
+			data["list"] = models.GetArticles(util.GetPage(c), setting.AppSetting.PageSize, maps)
+			data["total"] = models.GetArticleTotal(maps)
+		} else {
+			for _, err := range valid.Errors {
+				logging.Info("key", err.Key, "message", err.Message)
+			}
+		}
+
+		c.JSON(http.StatusOK, gin.H{
+			"code":    code,           //数据码
+			"data":    data,           //具体返回的数据
+			"message": e.GetMsg(code), //消息
+		})
+
+	*/
+
+	var (
+		appG    = app.Gin{C: c}
+		article = Article{
+			TagID: com.StrTo(c.Query("tag_id")).MustInt(),
+			State: com.StrTo(c.Query("state")).MustInt(),
+		}
+	)
+
+	httpCode, errCode := app.BindAndValid(c, &article)
+
+	if errCode != e.SUCCESS {
+		appG.Response(httpCode, errCode, nil)
+		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"code":    code,           //数据码
-		"data":    data,           //具体返回的数据
-		"message": e.GetMsg(code), //消息
-	})
+	tagService := article_service.Article{
+		TagID:    article.TagID,
+		State:    article.State,
+		PageNum:  util.GetPage(c),
+		PageSize: setting.AppSetting.PageSize,
+	}
+
+	//判断tagID是否存在
+	exists, err := tagService.ExistById()
+
+	//获取文章
+
+	//获取总数
+
+	//
+
 }
 
 //获取单个文章
