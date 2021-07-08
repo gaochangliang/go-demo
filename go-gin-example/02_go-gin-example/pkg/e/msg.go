@@ -17,6 +17,12 @@ var MsgFlags = map[int]string{
 
 	ERROR_CHECK_EXIST_ARTICLE_FAIL: "检查文章是否存在失败",
 	ERROR_NOT_EXIST_ARTICLE:        "该文章不存在",
+	ERROR_COUNT_ARTICLE_FAIL:       "统计文章失败",
+	ERROR_GET_ARTICLES_FAIL:        "获取多个文章错误",
+	ERROR_GET_ARTICLE_FAIL:         "获取单个文章错误",
+	ERROR_ADD_ARTICLE_FAIL:         "添加文章失败",
+	ERROR_EDIT_ARTICLE_FAIL:        "编辑文章失败",
+	ERROR_DELETE_ARTICLE_FAIL:      "删除文章失败",
 
 	ERROR_AUTH_CHECK_TOKEN_FAIL:    "Token鉴权失败",
 	ERROR_AUTH_CHECK_TOKEN_TIMEOUT: "Token已超时",

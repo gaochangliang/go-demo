@@ -13,18 +13,22 @@ type Article struct {
 	TagID int `json:"tag_id" gorm:"index"`
 	Tag   Tag `json:"tag"`
 
-	Title      string `json:"title"`
-	Content    string `json:"content"`
-	Desc       string `json:"desc"`
-	CreatedBy  string `json:"created_by"`
-	ModifiedBy string `json:"modified_by"`
-	State      int    `json:"state"`
+	Title         string `json:"title"`
+	Content       string `json:"content"`
+	Desc          string `json:"desc"`
+	CoverImageUrl string `json:"cover_image_url"`
+	CreatedBy     string `json:"created_by"`
+	ModifiedBy    string `json:"modified_by"`
+	State         int    `json:"state"`
 }
 
 //获取文章总数
-func GetArticleTotal(maps interface{}) (count int) {
-	db.Model(&Article{}).Where(maps).Count(&count)
-	return
+func GetArticleTotal(maps interface{}) (int, error) {
+	var count int
+	if err := db.Model(&Article{}).Where(maps).Count(&count).Error; err != nil {
+		return 0, err
+	}
+	return count, nil
 }
 
 //根据条件获取文章列表
@@ -53,30 +57,41 @@ func GetArticle(id int) (*Article, error) {
 }
 
 //新增文章
-func AddArticle(data map[string]interface{}) bool {
+func AddArticle(data map[string]interface{}) error {
+
+	article := Article{
+		TagID:         data["tag_id"].(int),
+		Title:         data["title"].(string),
+		Content:       data["content"].(string),
+		Desc:          data["desc"].(string),
+		CreatedBy:     data["created_by"].(string),
+		State:         data["state"].(int),
+		CoverImageUrl: data["cover_image_url"].(string),
+	}
+
 	//观察到没这里的key都是小写，最好和json后的字段保持一致
 	//类型断言用于判断  非接口类型是否实现了某个接口  或者 接口类型是否为某个类型
-	db.Create(&Article{
-		TagID:     data["tag_id"].(int),
-		Title:     data["title"].(string),
-		Content:   data["content"].(string),
-		Desc:      data["desc"].(string),
-		CreatedBy: data["created_by"].(string),
-		State:     data["state"].(int),
-	})
-	return true
+	if err := db.Create(&article).Error; err != nil {
+		return err
+	}
+
+	return nil
 }
 
 //编辑文章
-func EditArticle(id int, data interface{}) bool {
-	db.Model(&Article{}).Where("id = ? ", id).Update(data)
-	return true
+func EditArticle(id int, data interface{}) error {
+	if err := db.Model(&Article{}).Where("id = ? AND deleted_on = ? ", id, 0).Update(data).Error; err != nil {
+		return err
+	}
+	return nil
 }
 
 //删除文章
-func DeleteArticle(id int) bool {
-	db.Where("id = ? ", id).Delete(&Article{})
-	return true
+func DeleteArticle(id int) error {
+	if err := db.Where("id = ? ", id).Delete(&Article{}).Error; err != nil {
+		return err
+	}
+	return nil
 }
 
 //判断文章id是否存在
@@ -98,8 +113,7 @@ func ExistArticleById(id int) (bool, error) {
 /*
 这属于gorm的Callbacks，可以将回调方法定义为模型结构的指针，在创建、更新、查询、删除时将被调用，如果任何回调返回错误，gorm 将停止未来操作并回滚所有更改。
 
-gorm所支持的回调方法：
-
+gorm所支持的回调方法:
 创建：BeforeSave、BeforeCreate、AfterCreate、AfterSave
 更新：BeforeSave、BeforeUpdate、AfterUpdate、AfterSave
 删除：BeforeDelete、AfterDelete
