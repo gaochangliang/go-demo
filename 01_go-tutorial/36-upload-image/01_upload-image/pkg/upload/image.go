@@ -14,7 +14,7 @@ import (
 
 /*
 
-ImagePrefixUrl = http://127.0.0.1:8000
+PrefixUrl = http://127.0.0.1:8000
 ImageSavePath = upload/images/
 
 RuntimeRootPath = runtime/
