@@ -1,0 +1,27 @@
+syntax = "proto3" ;
+option go_package = "/";
+package proto;
+
+service SearchService {
+  rpc Search(SearchRequest) returns (SearchResponse) {}
+}
+
+message SearchRequest {
+  string request = 1;
+}
+
+message SearchResponse {
+  string response = 1;
+}
+
+/*
+
+cmd:          protoc --go_out=plugins=grpc:. *.proto
+cmd:          protoc --go_out=. *.proto                   (不使用插件生成)
+:             冒号充当分隔符的作用，后跟所需要的参数集
+--go_out=.    加载 protoc-gen-go插件在指定输出目录生成对应的 .pb.go
+*.proto       指定要操作的的源文件
+
+*/
+
+//go-protoc导出时遇到protoc-gen-go: unable to determine Go import path 解决方法 添加   option go_package ="/";
