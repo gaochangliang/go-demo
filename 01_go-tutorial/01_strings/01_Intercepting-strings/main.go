@@ -6,13 +6,14 @@ go的版本可能有如下几中形式 1.9.7  1.10
 package main
 
 import (
+	"fmt"
 	"runtime"
 	"strconv"
 	"strings"
 )
 
 func main() {
-	getMinVer(runtime.Version())
+	fmt.Println(getMinVer(runtime.Version()))
 }
 
 func getMinVer(v string) (uint64, error) {
