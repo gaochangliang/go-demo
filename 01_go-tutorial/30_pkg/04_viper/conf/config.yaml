@@ -1,0 +1,102 @@
+#1 对象键值对
+animal: fish							  #  :符号后面有空格
+
+person: {name: kobe, work: basketball}    # 注意中间的逗号
+
+# 注意变量名字位置一定要对齐，
+names:
+  name1: kobe
+  name2: jordan
+
+#2 arr
+
+languages:
+  - Ruby
+  - Perl
+  - Python
+
+
+#3 纯量
+
+number: 100			# 数值
+
+isSet: true			# bool
+
+parent: ~			# ~ 表示空值
+
+date: 1976-07-31	# 日期
+
+
+#4数据格式强制转化
+
+numberStr: !!str 100  # 数值转为字符串
+
+f: !!str true		  # bool转为字符串
+
+
+#5 字符串
+
+# 字符串默认不使用引号表示
+
+str: 这是一行字符串
+
+str1: 'name:\n kobe '	# 字符串包含特殊符号，可以加上加上单引号,单引号可以解析转义字符
+str2: "name: \n kobe "  # 字符串包含特殊符号，也可以加上双引号，双引号不能转义
+
+
+str3: '小盆友:你是一个''小坏蛋'''	# 字符串中包含引号需要两个引号转义
+
+# 字符串可以写成多行，从第二行开始，必须有一个单空格缩进。换行符默认会被转为空格。
+str4:  这是
+  一段多行
+  字符串
+
+
+# 多行字符串可以使用|保留换行符，
+this: |
+  one
+  two
+
+# 多行字符串也可以使用>折叠换行
+that: >
+  one
+  two
+
+# 多行字符串 +表示保留文字块末尾的换行，
+these: |+
+  one
+  two
+
+# 多行字符串 -表示s删除文字块末尾的换行，
+those: |-
+  one
+  two
+
+# 字符串中嵌入HTML标签
+
+message: |
+  <p style="color: red">
+  段落
+  </p>
+
+#6 字符串引用
+# &用来建立锚点（hostConfig），<<表示合并到当前数据，*用来引用锚点。
+
+hostConfig: &hostConfig
+  ip: localhost
+  port: 8080
+
+allPlayer:
+  password: 123456
+  <<: *hostConfig
+
+# 数组也可以建议锚点引用
+
+numbers:
+  - &one one
+  - two
+  - three
+  - *one
+
+
+# 主要介绍了yaml的一些语法，在线查看yaml文件效果地址：https://nodeca.github.io/js-yaml/

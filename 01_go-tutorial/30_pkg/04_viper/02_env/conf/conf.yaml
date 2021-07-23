@@ -1,0 +1,27 @@
+# debug or release
+RUNMODE: debug
+
+app:
+  pagesize: 10
+  jwtsecret: 23347$040412
+
+server:
+  httpport: 8080
+  readtimeout: 60
+  writetimeout: 60
+
+database:
+  type: mysql
+  user: root
+  password: 123456
+  host: localhost:3306
+  name: blog
+  tableprefix: blog_
+
+area:
+  ischinese: true
+
+developer:
+  - kobe
+  - jordan
+  - wade
