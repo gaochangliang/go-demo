@@ -1,0 +1,11 @@
+zap:
+  level: info           # 日志登记
+  format: console       #
+  prefix: '[GIN-VUE-ADMIN]'     # 日志前缀
+  director: log                 # 日志目录
+  link-name: latest_log
+  showLine: true                # 是否显示打印日志所在行
+  encode-level: LowercaseColorLevelEncoder  #
+  stacktrace-key: stacktrace
+  log-in-console: true        # 是否输出在控制台
+
