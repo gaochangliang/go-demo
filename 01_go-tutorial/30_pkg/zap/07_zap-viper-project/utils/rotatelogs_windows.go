@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 	"time"
-	"zap/06/global"
+	"zap/07/global"
 )
 
 func GetWriteSyncer() (zapcore.WriteSyncer, error) {

@@ -5,8 +5,8 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"time"
-	"zap/06/global"
-	"zap/06/utils"
+	"zap/07/global"
+	"zap/07/utils"
 )
 
 var level zapcore.Level
@@ -35,7 +35,15 @@ func Zap() (logger *zap.Logger) {
 		level = zap.InfoLevel
 	}
 
+	//We will use the zap.New(...) method to pass all the configuration manually,
+	//instead of using a preconfigured method like zap.NewProduction() to create the logger
 	if level == zap.DebugLevel || level == zap.ErrorLevel {
+		//The first parameter of the new method is zapcore.Core,
+		//and the zapcore.NewCore method shows that it takes three parameters
+
+		//Encoder: Encoder (how to write logs)
+		//WriterSyncer : Specify where the logs will be written to
+		//Log Level: Which level of logs will be written
 		logger = zap.New(getEncoderCore(), zap.AddStacktrace(level))
 	} else {
 		logger = zap.New(getEncoderCore())

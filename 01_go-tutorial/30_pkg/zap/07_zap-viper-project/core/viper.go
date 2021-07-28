@@ -5,7 +5,7 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 	"log"
-	"zap/06/global"
+	"zap/07/global"
 )
 
 func Viper() *viper.Viper {

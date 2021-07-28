@@ -1,8 +1,8 @@
 package main
 
 import (
-	"zap/06/core"
-	"zap/06/global"
+	"zap/07/core"
+	"zap/07/global"
 )
 
 func main() {
