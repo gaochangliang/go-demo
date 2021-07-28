@@ -40,7 +40,7 @@ func MkDir(src string) error {
 	return nil
 }
 
-// MustOpen maximize trying to open the file
+//创建目录
 func MustOpen(filePath string) error {
 	dir, err := os.Getwd()
 	if err != nil {
