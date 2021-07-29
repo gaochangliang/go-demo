@@ -104,7 +104,6 @@ func Edit2(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 }
 
-
 func Edit(w http.ResponseWriter, r *http.Request) {
 	db := dbConn()
 	nId := r.URL.Query().Get("id")
@@ -127,7 +126,6 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 	tmpl.ExecuteTemplate(w, "Edit", emp)
 	defer db.Close()
 }
-
 
 func Insert(w http.ResponseWriter, r *http.Request) {
 	db := dbConn()

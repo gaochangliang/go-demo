@@ -1,0 +1,7 @@
+package config
+
+type Server struct {
+	// gorm
+	Mysql  Mysql  `mapstructure:"mysql" json:"mysql" yaml:"mysql"`
+	System System `mapstructure:"system" json:"system" yaml:"system"`
+}
