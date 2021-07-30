@@ -51,13 +51,13 @@ var (
 
 func init() {
 	var err error
-	Cfg, err = ini.Load("conf/app.ini")
+	Cfg, err = ini.Load("config/app.ini")
 
 	//如果需要不区分键值大小写的话
-	//cfg, err := ini.InsensitiveLoad("conf/app.ini")
+	//cfg, err := ini.InsensitiveLoad("config/app.ini")
 
 	if err != nil {
-		log.Fatalf("Fail to parse 'conf/app.ini': %v", err)
+		log.Fatalf("Fail to parse 'config/app.ini': %v", err)
 	}
 	//加载基本的变量
 	LoadBase()

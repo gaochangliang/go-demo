@@ -25,14 +25,14 @@ type database struct {
 }
 
 func main() {
-	viper.SetConfigName("conf") // name of config file (without extension)
-	viper.SetConfigType("yaml") // REQUIRED if the config file does not have the extension in the name
+	viper.SetConfigName("config") // name of config file (without extension)
+	viper.SetConfigType("yaml")   // REQUIRED if the config file does not have the extension in the name
 
 	//also we can set filename
-	//viper.SetConfigFile("./conf/conf.yaml")
+	//viper.SetConfigFile("./config/config.yaml")
 
 	//search paths can be set more than one, viper will look for them in order according to the set order.
-	viper.AddConfigPath("../conf") // call multiple times to add many search paths
+	viper.AddConfigPath("../config") // call multiple times to add many search paths
 
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {

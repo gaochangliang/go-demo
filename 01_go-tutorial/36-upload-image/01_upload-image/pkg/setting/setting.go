@@ -23,9 +23,9 @@ type app struct {
 var AppSetting = &app{}
 
 func SetUp() {
-	Cfg, err := ini.Load("conf/app.ini")
+	Cfg, err := ini.Load("config/app.ini")
 	if err != nil {
-		log.Printf("fail to load conf/app.ini err %v", err)
+		log.Printf("fail to load config/app.ini err %v", err)
 	}
 
 	err = Cfg.Section("app").MapTo(AppSetting)

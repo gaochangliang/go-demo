@@ -15,9 +15,9 @@ type Excel struct {
 var ExcelSetting = &Excel{}
 
 func Setup() {
-	Cfg, err := ini.Load("conf/app.ini")
+	Cfg, err := ini.Load("config/app.ini")
 	if err != nil {
-		log.Fatalf("Fail to parse 'conf/app.ini': %v", err)
+		log.Fatalf("Fail to parse 'config/app.ini': %v", err)
 	}
 
 	err = Cfg.Section("excel").MapTo(ExcelSetting)
