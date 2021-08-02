@@ -7,7 +7,7 @@ import (
 )
 
 type appConfig struct {
-	Server   server   `mapstructure:"server" json:"server" yaml:"server"`
+	Server   server   `mapstructure:"api" json:"api" yaml:"api"`
 	Database database `mapstructure:"database" json:"database" yaml:"database"`
 }
 

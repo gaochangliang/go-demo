@@ -246,7 +246,7 @@ func (c *searchServiceClient) Search(ctx context.Context, in *SearchRequest, opt
 	return out, nil
 }
 
-// SearchServiceServer is the server API for SearchService service.
+// SearchServiceServer is the api API for SearchService service.
 type SearchServiceServer interface {
 	Search(context.Context, *SearchRequest) (*SearchResponse, error)
 }

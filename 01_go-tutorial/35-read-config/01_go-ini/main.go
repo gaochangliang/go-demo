@@ -16,7 +16,7 @@ RUN_MODE = debug
 PAGE_SIZE = 10
 JWT_SECRET = 23347$040412
 
-[server]
+[api]
 HTTP_PORT = 8000
 READ_TIMEOUT = 60
 WRITE_TIMEOUT = 60
@@ -79,9 +79,9 @@ func LoadBase() {
 }
 
 func LoadServer() {
-	sec, err := Cfg.GetSection("server")
+	sec, err := Cfg.GetSection("api")
 	if err != nil {
-		log.Fatalf("Fail to get section 'server': %v", err)
+		log.Fatalf("Fail to get section 'api': %v", err)
 	}
 
 	//为空的话默认设置值为8000，同时进行string->int类型转换

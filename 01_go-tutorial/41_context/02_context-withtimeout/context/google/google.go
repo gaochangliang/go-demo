@@ -33,8 +33,8 @@ func Search(ctx context.Context, query string) (Results, error) {
 	q := req.URL.Query()
 	q.Set("q", query)
 
-	// If ctx is carrying the user IP address, forward it to the server.
-	// Google APIs use the user IP to distinguish server-initiated requests
+	// If ctx is carrying the user IP address, forward it to the api.
+	// Google APIs use the user IP to distinguish api-initiated requests
 	// from end-user requests.
 	if userIP, ok := userip.FromContext(ctx); ok {
 		q.Set("userip", userIP.String())

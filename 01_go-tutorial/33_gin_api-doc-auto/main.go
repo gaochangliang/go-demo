@@ -13,7 +13,7 @@ import (
 
 // @title Swagger Example API
 // @version 1.0
-// @description This is a sample server celler server.
+// @description This is a sample api celler api.
 // @termsOfService http://swagger.io/terms/
 func main() {
 	router := routers.InitRouter()
@@ -34,7 +34,7 @@ func main() {
 		MaxHeaderBytes: 1 << 20,
 	}
 
-	log.Printf("[info] start http server listening %d", httpPort)
+	log.Printf("[info] start http api listening %d", httpPort)
 
 	_ = server.ListenAndServe()
 

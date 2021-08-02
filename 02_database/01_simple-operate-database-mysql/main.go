@@ -174,7 +174,7 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fmt.Println("server start at localhost:8080")
+	fmt.Println("api start at localhost:8080")
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/show", Show)
 	http.HandleFunc("/new", New)

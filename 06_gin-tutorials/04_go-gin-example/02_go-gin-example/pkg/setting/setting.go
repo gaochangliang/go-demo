@@ -70,7 +70,7 @@ func Setup() {
 
 	AppSetting.ImageMaxSize = AppSetting.ImageMaxSize * 1024 * 1024
 
-	err = Cfg.Section("server").MapTo(ServerSetting)
+	err = Cfg.Section("api").MapTo(ServerSetting)
 	if err != nil {
 		log.Fatalf("Cfg.MapTo ServerSetting err: %v", err)
 	}

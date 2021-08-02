@@ -88,7 +88,7 @@ var SwaggerInfo = swaggerInfo{
 	BasePath:    "/api/v1",
 	Schemes:     []string{},
 	Title:       "Swagger Example API",
-	Description: "This is a sample server celler server.",
+	Description: "This is a sample api celler api.",
 }
 
 type s struct{}

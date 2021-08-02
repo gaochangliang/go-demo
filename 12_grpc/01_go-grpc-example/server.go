@@ -14,7 +14,7 @@ type SearchService struct {
 const PORT = "9001"
 
 func (s *SearchService) Search(ctx context.Context, r *pb.SearchRequest) (*pb.SearchResponse, error) {
-	return &pb.SearchResponse{Response: r.GetRequest() + " server"}, nil
+	return &pb.SearchResponse{Response: r.GetRequest() + " api"}, nil
 }
 
 func main() {

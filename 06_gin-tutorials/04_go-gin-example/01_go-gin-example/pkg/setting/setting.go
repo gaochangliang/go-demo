@@ -33,9 +33,9 @@ func loadBase() {
 }
 
 func loadServer() {
-	sec, err := Cfg.GetSection("server")
+	sec, err := Cfg.GetSection("api")
 	if err != nil {
-		log.Fatalf("Fail to get section 'server':%v", err)
+		log.Fatalf("Fail to get section 'api':%v", err)
 	}
 	HTTPPort = sec.Key("HTTP_PORT").MustInt(8000)
 	ReadTimeout = time.Duration(sec.Key("READ_TIMEOUT").MustInt(60)) * time.Second

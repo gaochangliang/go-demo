@@ -60,11 +60,11 @@ func main() {
 
 	//Registering and Using Aliases
 	//Aliases permit a single value to be referenced by multiple keys
-	//After setting the PORT change server.httpPort will also change, serverhttpport and port is equivalent
-	fmt.Println("server.httpport", viper.Get("server.httpport"))
-	viper.RegisterAlias("server.httpport", "port")
+	//After setting the PORT change api.httpPort will also change, serverhttpport and port is equivalent
+	fmt.Println("api.httpport", viper.Get("api.httpport"))
+	viper.RegisterAlias("api.httpport", "port")
 	viper.Set("port", 80)
-	fmt.Printf("server httpPort %v port %v", viper.Get("server.httpport"), viper.Get("port"))
+	fmt.Printf("api httpPort %v port %v", viper.Get("api.httpport"), viper.Get("port"))
 
 	viper.WatchConfig()
 	viper.OnConfigChange(func(e fsnotify.Event) {

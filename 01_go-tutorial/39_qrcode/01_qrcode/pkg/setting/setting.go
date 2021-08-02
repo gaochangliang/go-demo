@@ -39,9 +39,9 @@ func SetUp() {
 		log.Printf("cfg section app mapto AppSetting err %v", err)
 	}
 
-	err = Cfg.Section("server").MapTo(ServerSetting)
+	err = Cfg.Section("api").MapTo(ServerSetting)
 	if err != nil {
-		log.Printf("cfg section server mapto ServerSetting err %v", err)
+		log.Printf("cfg section api mapto ServerSetting err %v", err)
 	}
 
 	ServerSetting.ReadTimeout = ServerSetting.ReadTimeout * time.Second

@@ -9,7 +9,7 @@ func main() {
 	rawJSON := []byte(`{
     "level":"debug",
     "encoding":"json",
-    "outputPaths": ["stdout", "server.log"],
+    "outputPaths": ["stdout", "api.log"],
     "errorOutputPaths": ["stderr"],
     "initialFields":{"name":"dj"},
     "encoderConfig": {
@@ -36,6 +36,6 @@ func main() {
 	}
 	defer logger.Sync()
 
-	logger.Info("server start work successfully")
-	logger.Info("server start work successfully")
+	logger.Info("api start work successfully")
+	logger.Info("api start work successfully")
 }

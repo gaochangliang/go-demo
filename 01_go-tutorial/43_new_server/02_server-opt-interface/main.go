@@ -14,5 +14,5 @@ func main() {
 	}
 	s := server.NewServer(opts...)
 
-	fmt.Println("New server", s)
+	fmt.Println("New api", s)
 }

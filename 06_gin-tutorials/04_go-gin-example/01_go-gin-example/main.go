@@ -9,7 +9,7 @@ import (
 
 // @title Swagger Example API
 // @version 1.0
-// @description This is a sample server celler server.
+// @description This is a sample api celler api.
 // @termsOfService https://www.topgoer.com
 // @contact.name www.topgoer.com
 // @contact.url https://www.topgoer.com

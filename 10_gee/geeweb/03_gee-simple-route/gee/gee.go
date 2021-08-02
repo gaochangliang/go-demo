@@ -40,7 +40,7 @@ func (e *Engine) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// Run defines the method to start a http server
+// Run defines the method to start a http api
 func (e *Engine) Run(addr string) (err error) {
 	return http.ListenAndServe(addr, e)
 }

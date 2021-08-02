@@ -5,7 +5,7 @@ info:
     email: me@razeen.me
     name: www.topgoer.com
     url: https://www.topgoer.com
-  description: This is a sample server celler server.
+  description: This is a sample api celler api.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
