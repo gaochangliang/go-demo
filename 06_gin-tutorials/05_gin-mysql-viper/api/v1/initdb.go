@@ -5,6 +5,7 @@ import (
 	"gin/05/e"
 	"gin/05/global"
 	"gin/05/model"
+	"gin/05/service"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -23,4 +24,9 @@ func InitDB(c *gin.Context) {
 		return
 	}
 
+	if err := service.InitDB(dbInfo); err != nil {
+		g.Response(http.StatusInternalServerError, e.InvalidParams, nil)
+		return
+	}
+	g.Response(http.StatusOK, e.Success, nil)
 }

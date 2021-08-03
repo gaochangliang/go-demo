@@ -8,5 +8,6 @@ const (
 	ErrorAddUserFail        = 10000
 	ErrorCheckExistUserFail = 10001
 
-	ErrorDBExist = 11000
+	ErrorDBExist          = 11000
+	ErrorAutoCreateDBFail = 110001
 )

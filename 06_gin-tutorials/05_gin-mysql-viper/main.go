@@ -15,5 +15,6 @@ func main() {
 		db, _ := global.GLOBAL_DB.DB()
 		defer db.Close()
 	}
+	core.RunServer()
 
 }

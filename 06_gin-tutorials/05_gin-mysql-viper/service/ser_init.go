@@ -6,6 +6,7 @@ import (
 	"gin/05/config"
 	"gin/05/global"
 	"gin/05/model"
+	"gin/05/source"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -52,6 +53,15 @@ func InitDB(conf model.InitDB) error {
 		return err
 	}
 
+	//初始化表数据，添加超级管理员
+	err = initTable(
+		source.Admin,
+	)
+	if err != nil {
+		global.GLOBAL_DB = nil
+		return err
+	}
+	return nil
 }
 
 func createTable(dsn string, driver string, createSql string) error {
@@ -72,4 +82,14 @@ func createTable(dsn string, driver string, createSql string) error {
 
 	_, err = db.Exec(createSql)
 	return err
+}
+
+func initTable(initTableFunctions ...model.InitTableFunc) error {
+	for _, v := range initTableFunctions {
+		err := v.Init()
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }

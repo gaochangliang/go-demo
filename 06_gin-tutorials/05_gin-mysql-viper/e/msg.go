@@ -7,7 +7,8 @@ var msgFlags = map[int]string{
 	ErrorAddUserFail:        "添加用户失败",
 	ErrorCheckExistUserFail: "检查用户失败",
 
-	ErrorDBExist: "已存在数据库配置",
+	ErrorDBExist:          "已存在数据库配置",
+	ErrorAutoCreateDBFail: "自动创阿金数据库失败",
 }
 
 func GetMsg(code int) string {
