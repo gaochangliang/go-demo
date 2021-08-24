@@ -1,0 +1,36 @@
+[GIN-VUE-ADMIN]2021/07/28 - 11:56:11.228	[34minfo[0m	1
+[GIN-VUE-ADMIN]2021/07/28 - 11:56:11.245	[34minfo[0m	12
+[GIN-VUE-ADMIN]2021/07/28 - 11:56:11.245	[34minfo[0m	123
+[zap-log]2021/07/28 - 14:01:18.598	[34minfo[0m	1
+[zap-log]2021/07/28 - 14:01:18.599	[34minfo[0m	12
+[zap-log]2021/07/28 - 14:01:18.599	[34minfo[0m	123
+[zap-log]2021/07/28 - 14:03:40.877	[34minfo[0m	1
+[zap-log]2021/07/28 - 14:03:40.877	[34minfo[0m	12
+[zap-log]2021/07/28 - 14:03:40.877	[31merror[0m	123
+[zap-log]2021/07/28 - 14:07:59.695	[34minfo[0m	1
+[zap-log]2021/07/28 - 14:07:59.695	[34minfo[0m	12
+[zap-log]2021/07/28 - 14:07:59.695	[31merror[0m	123
+[zap-log]2021/07/28 - 14:08:26.686	[34minfo[0m	1
+[zap-log]2021/07/28 - 14:08:26.686	[34minfo[0m	12
+[zap-log]2021/07/28 - 14:08:26.686	[31merror[0m	123
+[zap-log]2021/07/28 - 14:08:31.694	[34minfo[0m	1
+[zap-log]2021/07/28 - 14:08:31.694	[34minfo[0m	12
+[zap-log]2021/07/28 - 14:08:31.694	[31merror[0m	123
+[zap-log]2021/07/28 - 14:09:14.127	[34minfo[0m	1
+[zap-log]2021/07/28 - 14:09:14.127	[34minfo[0m	12
+[zap-log]2021/07/28 - 14:09:14.127	[31merror[0m	123
+[zap-log]2021/07/28 - 14:13:49.345	[34minfo[0m	1
+[zap-log]2021/07/28 - 14:13:49.346	[34minfo[0m	12
+[zap-log]2021/07/28 - 14:13:49.346	[31merror[0m	123
+[zap-log]2021/07/28 - 14:14:37.408	[34minfo[0m	1
+[zap-log]2021/07/28 - 14:14:37.409	[34minfo[0m	12
+[zap-log]2021/07/28 - 14:14:37.409	[31merror[0m	123
+[zap-log]2021/07/28 - 14:15:18.536	[34minfo[0m	1
+[zap-log]2021/07/28 - 14:15:18.536	[34minfo[0m	12
+[zap-log]2021/07/28 - 14:15:18.536	[31merror[0m	123
+[zap-log]2021/07/28 - 14:16:09.188	[34minfo[0m	1
+[zap-log]2021/07/28 - 14:16:09.188	[34minfo[0m	12
+[zap-log]2021/07/28 - 14:16:09.188	[31merror[0m	123
+[zap-log]2021/07/28 - 14:16:41.947	[34minfo[0m	F:/CodeDemo/go-demo/01_go-tutorial/30_pkg/zap/06_zap-viper-project/main.go:12	1
+[zap-log]2021/07/28 - 14:16:41.947	[34minfo[0m	F:/CodeDemo/go-demo/01_go-tutorial/30_pkg/zap/06_zap-viper-project/main.go:13	12
+[zap-log]2021/07/28 - 14:16:41.947	[31merror[0m	F:/CodeDemo/go-demo/01_go-tutorial/30_pkg/zap/06_zap-viper-project/main.go:14	123

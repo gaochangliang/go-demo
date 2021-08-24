@@ -19,3 +19,4 @@ func MysqlTables(db *gorm.DB) {
 
 	log.Println("register table success")
 }
+

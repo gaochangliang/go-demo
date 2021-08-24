@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 	slice1 := []int{1, 2, 3, 4, 5}
 
-	sliOne := slice1[0:5]
+	sliOne := slice1[0:5]	//slice[start:end] end最多能取长度5
 	fmt.Println(" 0 - 5 ", sliOne)
 
 	sliTwo := slice1[0:6]

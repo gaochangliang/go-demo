@@ -15,6 +15,7 @@ func RunServer() {
 	if err != nil {
 		log.Fatal("server err", err)
 		return
+		log.
 	}
 }
 

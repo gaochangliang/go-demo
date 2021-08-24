@@ -1,0 +1,2 @@
+[INFO][article.go:48]2021/06/29 10:53:11 [key tag_id message tag_id must larger than 1]
+[INFO][article.go:48]2021/06/29 10:53:11 [key state message state must be 0 or 1]

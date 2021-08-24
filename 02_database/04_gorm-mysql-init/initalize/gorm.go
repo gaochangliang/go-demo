@@ -23,7 +23,6 @@ func GormMysql() *gorm.DB {
 	if m.Dbname == "" {
 		return nil
 	}
-
 	dsn := m.Username + ":" + m.Password + "@tcp(" + m.Path + ")/" + m.Dbname + "?" + m.Config
 	mysqlConfig := mysql.Config{
 		DSN:                       dsn,

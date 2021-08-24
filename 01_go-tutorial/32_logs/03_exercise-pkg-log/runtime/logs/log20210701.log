@@ -1,0 +1,6 @@
+[INFO][main.go:6]2021/07/01 11:45:30 [123]
+[INFO][main.go:6]2021/07/01 11:48:07 [info Error]
+[DEBUG][main.go:7]2021/07/01 11:48:07 [debug error]
+[WARN][main.go:8]2021/07/01 11:48:07 [warning error]
+[ERROR][main.go:9]2021/07/01 11:48:07 [Error error]
+[FATAL][main.go:10]2021/07/01 11:48:07 [Fatal error]
